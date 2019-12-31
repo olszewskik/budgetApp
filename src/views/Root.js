@@ -7,6 +7,8 @@ import { addExpense } from '../actions/expenses';
 import { setTextFilter } from '../actions/filters';
 import getVisibleExpenses from '../selectors/expenses';
 
+import Info from '../playground/hoc';
+
 const store = configureStore();
 
 store.dispatch(addExpense({ description: 'water bill' }));
@@ -21,6 +23,7 @@ console.log(state);
 function Root() {
   return (
     <>
+      <Info info="There are the details" />
       <Router>
         <Header />
         <AppRouter />
