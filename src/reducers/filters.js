@@ -1,11 +1,11 @@
-const filtersReducerDefaultState = {
+const initialState = {
   text: '',
   sortBy: 'date',
   startDate: undefined,
   endDate: undefined,
 };
 
-const filtersReducer = (state = filtersReducerDefaultState, action) => {
+const filtersReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_TEXT_FILTER':
       return {
