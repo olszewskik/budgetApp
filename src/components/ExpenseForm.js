@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import 'react-dates/initialize';
-import { SingleDatePicker } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
+//import 'react-dates/initialize';
+//import { SingleDatePicker } from 'react-dates';
+//import 'react-dates/lib/css/_datepicker.css';
 
 class ExpenseForm extends Component {
   constructor(props) {
@@ -11,8 +11,10 @@ class ExpenseForm extends Component {
       description: props.expense ? props.expense.description : '',
       note: props.expense ? props.expense.note : '',
       amount: props.expense ? (props.expense.amount / 100).toString() : '',
-      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
-      calendarFocused: false,
+      createdAt: props.expense
+        ? moment(props.expense.createdAt).format('YYYY-MM-DD')
+        : moment().format('YYYY-MM-DD'),
+      //calendarFocused: false,
       error: '',
     };
   }
@@ -34,15 +36,22 @@ class ExpenseForm extends Component {
     }
   };
 
+  /*
   onDateChange = createdAt => {
     if (createdAt) {
       this.setState(() => ({ createdAt }));
     }
   };
+  */
+  onDateChange = e => {
+    const createdAt = e.target.value;
+    this.setState(() => ({ createdAt }));
+  };
 
+  /*
   onFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }));
-  };
+  };*/
 
   onSubmit = e => {
     e.preventDefault();
@@ -77,14 +86,15 @@ class ExpenseForm extends Component {
             value={this.state.amount}
             onChange={this.onAmountChange}
           />
-          <SingleDatePicker
+          <input type="date" value={this.state.createdAt} onChange={this.onDateChange} />
+          {/* <SingleDatePicker
             date={this.state.createdAt}
             onDateChange={this.onDateChange}
             focused={this.state.calendarFocused}
             onFocusChange={this.onFocusChange}
             numberOfMonths={1}
             isOutsideRange={() => false}
-          />
+          /> */}
           <textarea
             placeholder="Add a note for your expense"
             value={this.state.note}

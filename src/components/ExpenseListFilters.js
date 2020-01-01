@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import 'react-dates/initialize';
-import { DateRangePicker } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
+import moment from 'moment';
+//import 'react-dates/initialize';
+//import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+//import 'react-dates/lib/css/_datepicker.css';
 import {
   setTextFilter,
   sortByDate,
@@ -16,6 +17,7 @@ class ExpenseListFilters extends Component {
     calendarFocused: null,
   };
 
+  /*
   onDatesChange = ({ startDate, endDate }) => {
     this.props.dispatch(setStartDate(startDate));
     this.props.dispatch(setEndDate(endDate));
@@ -23,6 +25,23 @@ class ExpenseListFilters extends Component {
 
   onFocusChange = ({ calendarFocused }) => {
     this.setState(() => ({ calendarFocused }));
+  };
+  */
+
+  onStartDateChange = e => {
+    if (!e.target.value) {
+      this.props.dispatch(setStartDate(moment('1970-01-01')));
+    } else {
+      this.props.dispatch(setStartDate(moment(e.target.value)));
+    }
+  };
+
+  onEndDateChange = e => {
+    if (!e.target.value) {
+      this.props.dispatch(setEndDate(moment('1970-01-01')));
+    } else {
+      this.props.dispatch(setEndDate(moment(e.target.value)));
+    }
   };
 
   render() {
@@ -48,6 +67,17 @@ class ExpenseListFilters extends Component {
           <option value="date">Date</option>
           <option value="amount">Amount</option>
         </select>
+        <input
+          type="date"
+          value={moment(this.props.filters.startDate).format('YYYY-MM-DD')}
+          onChange={this.onStartDateChange}
+        />
+        <input
+          type="date"
+          value={moment(this.props.filters.endDate).format('YYYY-MM-DD')}
+          onChange={this.onEndDateChange}
+        />
+        {/*
         <DateRangePicker
           startDate={this.props.filters.startDate}
           startDateId="1"
@@ -60,6 +90,7 @@ class ExpenseListFilters extends Component {
           numberOfMonths={1}
           isOutsideRange={() => false}
         />
+        */}
       </div>
     );
   }
