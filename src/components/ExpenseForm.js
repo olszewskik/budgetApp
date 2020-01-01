@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Formik, Field, Form } from 'formik';
 import moment from 'moment';
 //import 'react-dates/initialize';
 //import { SingleDatePicker } from 'react-dates';
@@ -70,24 +71,25 @@ class ExpenseForm extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            placeholder="Description"
-            autoFocus
-            value={this.state.description}
-            onChange={this.onDescriptionChange}
-          />
-          <input
-            type="number"
-            placeholder="Amount"
-            value={this.state.amount}
-            onChange={this.onAmountChange}
-          />
-          <input type="date" value={this.state.createdAt} onChange={this.onDateChange} />
-          {/* <SingleDatePicker
+      <>
+        <div>
+          {this.state.error && <p>{this.state.error}</p>}
+          <form onSubmit={this.onSubmit}>
+            <input
+              type="text"
+              placeholder="Description"
+              autoFocus
+              value={this.state.description}
+              onChange={this.onDescriptionChange}
+            />
+            <input
+              type="number"
+              placeholder="Amount"
+              value={this.state.amount}
+              onChange={this.onAmountChange}
+            />
+            <input type="date" value={this.state.createdAt} onChange={this.onDateChange} />
+            {/* <SingleDatePicker
             date={this.state.createdAt}
             onDateChange={this.onDateChange}
             focused={this.state.calendarFocused}
@@ -95,14 +97,22 @@ class ExpenseForm extends Component {
             numberOfMonths={1}
             isOutsideRange={() => false}
           /> */}
-          <textarea
-            placeholder="Add a note for your expense"
-            value={this.state.note}
-            onChange={this.onNoteChange}
-          ></textarea>
-          <button>Add Expense</button>
-        </form>
-      </div>
+            <textarea
+              placeholder="Add a note for your expense"
+              value={this.state.note}
+              onChange={this.onNoteChange}
+            ></textarea>
+            <button>Add Expense</button>
+          </form>
+        </div>
+
+        <h3>Formik</h3>
+        <Formik initialValues={{ description: this.state.description }}>
+          <Form>
+            <Field name="description" type="text" />
+          </Form>
+        </Formik>
+      </>
     );
   }
 }
