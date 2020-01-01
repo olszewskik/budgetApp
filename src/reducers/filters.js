@@ -15,12 +15,12 @@ const filtersReducer = (state = initialState, action) => {
     case 'SORT_BY_DATE':
       return {
         ...state,
-        sortBy: 'amount',
+        sortBy: 'date',
       };
     case 'SORT_BY_AMOUNT':
       return {
         ...state,
-        sortBy: 'date',
+        sortBy: 'amount',
       };
     case 'SET_START_DATE':
       return {
