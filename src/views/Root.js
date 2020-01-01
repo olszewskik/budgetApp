@@ -13,11 +13,11 @@ store.dispatch(addExpense({ description: 'water bill', amount: 4500, createdAt: 
 store.dispatch(addExpense({ description: 'gas bill', amount: 250, createdAt: 3000 }));
 store.dispatch(addExpense({ description: 'rent', amount: 10950, createdAt: 1000 }));
 
-const state = store.getState();
-const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+//const state = store.getState();
+//const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
 
 //console.log(state);
-console.log(visibleExpenses);
+//console.log(visibleExpenses);
 
 function Root() {
   return (
