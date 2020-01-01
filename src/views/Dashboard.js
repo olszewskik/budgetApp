@@ -1,7 +1,13 @@
-import React from "react";
+import React from 'react';
+import ExpenseList from '../components/ExpenseList';
+import ExpenseListFilters from '../components/ExpenseListFilters';
 
-function Dashboard() {
-  return <h1>Dashboard</h1>;
-}
+const Dashboard = () => (
+  <>
+    <h1>Dashboard</h1>
+    <ExpenseListFilters />
+    <ExpenseList />
+  </>
+);
 
 export default Dashboard;
